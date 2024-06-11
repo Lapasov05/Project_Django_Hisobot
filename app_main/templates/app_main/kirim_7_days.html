@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .logout-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-link {
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #ffccbc;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-link:hover {
+            background-color: #ffab91;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #00796b;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        li:nth-child(odd) {
+            background-color: #f0f0f0;
+        }
+
+        strong {
+            color: #00796b;
+        }
+
+        .no-costs {
+            color: #888;
+        }
+    </style>
+
+    <div class="logout-container">
+        <a class="logout-link" href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <h1>Kirim Costs Within 7 Days</h1>
+    <h2>Total Amount: {{ summa }}</h2>
+    <ul>
+        {% for cost in costs_within_7_days_kirim %}
+            <li>
+                <strong>Name:</strong> {{ cost.name }}<br>
+                <strong>Amount:</strong> {{ cost.amount }}<br>
+                <strong>Transaction Type:</strong> {{ cost.transaction_type }}<br>
+                <strong>Created:</strong> {{ cost.created }}
+            </li>
+        {% empty %}
+            <li class="no-costs">No kirim costs added within the last 7 days.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

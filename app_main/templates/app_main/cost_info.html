@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+
+        .cost-info-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light grey background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .cost-info-heading {
+            font-size: 1.5em;
+            color: #00796b; /* Teal color for heading */
+            margin-bottom: 10px;
+        }
+
+        .cost-info {
+            margin-bottom: 10px;
+        }
+
+        .cost-info label {
+            font-weight: bold;
+            color: #333; /* Dark text color */
+        }
+
+        .cost-info p {
+            margin: 5px 0;
+        }
+
+        .confirm-delete-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #f44336; /* Red background for delete */
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: #d32f2f; /* Darker red on hover */
+        }
+
+        .cancel {
+            background-color: #007bff; /* Blue background for cancel */
+        }
+
+        .cancel:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+
+    <div class="cost-info-container">
+        <h2 class="cost-info-heading">Cost Information</h2>
+
+        <div class="cost-info">
+            <label for="transaction_type">Transaction Type:</label>
+            <p>{{ Cost.transaction_type }}</p>
+        </div>
+
+        <div class="cost-info">
+            <label for="name">Name:</label>
+            <p>{{ Cost.name }}</p>
+        </div>
+
+        <div class="cost-info">
+            <label for="amount">Amount:</label>
+            <p>{{ Cost.amount }}</p>
+        </div>
+        <div class="cost-info">
+            <label for="amount">Payment type:</label>
+            <p>{{ Cost.payment_type }}</p>
+        </div>
+        <div class="cost-info">
+            <label for="date">Added date:</label>
+            <p>{{ Cost.created }}</p>
+        </div>
+        <button type="submit" class="btn">Delete</button>
+        <a href="/" class="btn cancel">Cancel</a>
+    </div>
+
+{% endblock %}

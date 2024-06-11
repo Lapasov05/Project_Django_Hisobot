@@ -2,15 +2,235 @@
 
 {% block content %}
 
-<h1>{{ full_name }}</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
 
-<a class="text-blue-600" href="{% url 'logout' %}">Logout</a>
+        .logout-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-<h2>Costs:</h2>
-<ul>
-    {% for cost in costs_list %}
-        <li>{{ cost.name }} - {{ cost.amount }}</li>
-    {% endfor %}
-</ul>
+        .logout-link {
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #ffccbc;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-link:hover {
+            background-color: #ffab91;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #00796b;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        li:nth-child(odd) {
+            background-color: #e0f2f1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit, .delete {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .edit {
+            background-color: #4caf50;
+        }
+
+        .edit:hover {
+            background-color: #388e3c;
+        }
+
+        .delete {
+            background-color: #f44336;
+        }
+
+        .delete:hover {
+            background-color: #d32f2f;
+        }
+
+        .add-cost-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .add-cost-button {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 16px;
+            background-color: #00796b;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-cost-button:hover {
+            background-color: #004d40;
+        }
+
+        .chiqim-7-days-container,
+        .chiqim-30-days-container,
+        .kirim-7-days-container,
+        .kirim-30-days-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .chiqim-7-days-button,
+        .chiqim-30-days-button,
+        .kirim-7-days-button,
+        .kirim-30-days-button {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 16px;
+            background-color: #00796b;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .chiqim-7-days-button:hover,
+        .chiqim-30-days-button:hover,
+        .kirim-7-days-button:hover,
+        .kirim-30-days-button:hover {
+            background-color: #004d40;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .right-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+    </style>
+
+    <div class="logout-container">
+        <a class="logout-link" href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <h1>{{ full_name }}</h1>
+
+    <h2>Kirim:</h2>
+
+    <ul>
+        {% for cost in Kirim %}
+            <li>
+                {{ cost.name }} - {{ cost.amount }}
+                <div class="actions">
+                    <a class="edit" href="{% url 'update_cost' cost.id %}">
+                        <i class="fas fa-pencil-alt">edit</i>
+                    </a>
+                    <a class="delete" href="{% url 'delete_cost' cost.id %}">
+                        <i class="fas fa-trash-alt">delete</i>
+                    </a>
+                    <a class="info" href="{% url 'get_cost_info' cost.id %}">
+                        Info
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <h2>Chiqim:</h2>
+
+    <ul>
+        {% for cost in Chiqim %}
+            <li>
+                {{ cost.name }} - {{ cost.amount }}
+                <div class="actions">
+                    <a class="edit" href="{% url 'update_cost' cost.id %}">
+                        <i class="fas fa-pencil-alt">edit</i>
+                    </a>
+                    <a class="delete" href="{% url 'delete_cost' cost.id %}">
+                        <i class="fas fa-trash-alt">delete</i>
+                    </a>
+                    <a class="info" href="{% url 'get_cost_info' cost.id %}">
+                        Info
+                    </a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="add-cost-container">
+        <a class="add-cost-button" href="{% url 'add_cost' %}">Add Cost</a>
+    </div>
+
+    <div class="chiqim-7-days-container">
+        <a class="chiqim-7-days-button" href="{% url 'chiqim_get_costs_within_7_days' %}">Chiqim 7 Days</a>
+    </div>
+    <div class="chiqim-30-days-container">
+        <a class="chiqim-30-days-button" href="{% url 'chiqim_get_costs_within_30_days' %}">Chiqim 30 Days</a>
+    </div>
+    <div class="kirim-7-days-container">
+        <a class="kirim-7-days-button" href="{% url 'kirim_get_costs_within_7_days' %}"> Kirim 7 Days</a>
+    </div>
+    <div class="kirim-30-days-container">
+        <a class="kirim-30-days-button" href="{% url 'kirim_get_costs_within_30_days' %}"> Kirim 30 Days</a>
+    </div>
 
 {% endblock %}

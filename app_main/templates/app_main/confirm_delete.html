@@ -1,0 +1,45 @@
+<!-- templates/app_main/confirm_delete.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .confirm-delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #f44336; /* Red background for delete */
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin: 10px;
+    }
+    .btn:hover {
+        background-color: #d32f2f; /* Darker red on hover */
+    }
+    .cancel {
+        background-color: #007bff; /* Blue background for cancel */
+    }
+    .cancel:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+
+<div class="confirm-delete-container">
+    <h2>Are you sure you want to delete "{{ cost.name }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn">Delete</button>
+        <a href="/" class="btn cancel">Cancel</a>
+    </form>
+</div>
+{% endblock %}
